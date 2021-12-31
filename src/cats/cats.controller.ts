@@ -22,4 +22,12 @@ export class CatsController {
       age: 12,
     };
   }
+
+  /**
+   * Library-specific to manipulate response
+   */
+  @Get('library-specific')
+  ls(@Res() response: Response) {
+    response.status(200).send('这个是通过library-specific的方法返回response');
+  }
 }
