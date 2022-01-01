@@ -1,4 +1,13 @@
-import { Controller, Get, Ip, Next, Post, Req, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpCode,
+  Ip,
+  Next,
+  Post,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { Response, Request, NextFunction } from 'express';
 
 @Controller('cats')
@@ -70,6 +79,7 @@ export class CatsController {
    * Post请求测试
    */
   @Post('testPost')
+  @HttpCode(200) // 修改返回的状态码
   testPost(@Req() req: Request) {
     console.log(req.headers);
     console.log(req.query);
