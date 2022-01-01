@@ -66,6 +66,9 @@ export class CatsController {
     });
   }
 
+  /**
+   * Post请求测试
+   */
   @Post('testPost')
   testPost(@Req() req: Request) {
     console.log(req.headers);
@@ -73,5 +76,31 @@ export class CatsController {
     console.log(req.body);
 
     return '你的POST请求我已经收到了';
+  }
+
+  /**
+   * wildcard
+   * * match any number of characters
+   * ? match a single alphabet
+   * [] match a single alphabet in a specific position
+   * [!] exclude characters inside the brackets
+   * a-z match a range of characters
+   * # match any single numeric character
+   *
+   * 尝试访问
+   * - http://localhost:3001/cats/abcd?test=t
+   * - http://localhost:3001/cats/ab_cd?test=t
+   * - http://localhost:3001/cats/abbbbbacd?test=t
+   */
+  @Get('ab*cd')
+  // TODO 搞清楚wildcard的规则
+  async wildcard1(@Req() req: Request) {
+    console.log(req.query);
+    console.log(req.path);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(`async wildcard 'ab*cd' ${+new Date()}`);
+      }, 1000);
+    });
   }
 }
