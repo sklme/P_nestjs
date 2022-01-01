@@ -1,5 +1,5 @@
-import { Controller, Get, Res } from '@nestjs/common';
-import { Response } from 'express';
+import { Controller, Get, Req, Res } from '@nestjs/common';
+import { Response, Request } from 'express';
 
 @Controller('cats')
 export class CatsController {
@@ -29,5 +29,14 @@ export class CatsController {
   @Get('library-specific')
   ls(@Res() response: Response) {
     response.status(200).send('这个是通过library-specific的方法返回response');
+  }
+
+  /**
+   * 获取请求对象
+   */
+  @Get('getReqObject')
+  getReqObject(@Req() req: Request) {
+    console.log(req.query);
+    return 'getReq';
   }
 }
