@@ -7,6 +7,7 @@ import {
   Ip,
   Next,
   Post,
+  Redirect,
   Req,
   Res,
 } from '@nestjs/common';
@@ -132,6 +133,7 @@ export class CatsController {
    * - http://localhost:3001/cats/reg2/testacacacacacacacacacactest?test=t
    */
   @Get('reg2/test(ac)+test')
+  @Redirect('https://nestjs.com', 301)
   regexptest2(@Req() req: Request) {
     console.log(req.query);
     return 'test(ac)+test';
