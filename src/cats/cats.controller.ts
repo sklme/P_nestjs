@@ -1,4 +1,4 @@
-import { Controller, Get, Ip, Next, Req, Res } from '@nestjs/common';
+import { Controller, Get, Ip, Next, Post, Req, Res } from '@nestjs/common';
 import { Response, Request, NextFunction } from 'express';
 
 @Controller('cats')
@@ -64,5 +64,14 @@ export class CatsController {
       name: '测试装饰器',
       version: '1.0.0',
     });
+  }
+
+  @Post('testPost')
+  testPost(@Req() req: Request) {
+    console.log(req.headers);
+    console.log(req.query);
+    console.log(req.body);
+
+    return '你的POST请求我已经收到了';
   }
 }
