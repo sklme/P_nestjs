@@ -1,6 +1,8 @@
 import {
   Controller,
   Get,
+  Header,
+  Headers,
   HttpCode,
   Ip,
   Next,
@@ -80,6 +82,7 @@ export class CatsController {
    */
   @Post('testPost')
   @HttpCode(200) // 修改返回的状态码
+  @Header('Cache-Control', 'none') // TODO: 怎么一次性设置多个header？
   testPost(@Req() req: Request) {
     console.log(req.headers);
     console.log(req.query);
