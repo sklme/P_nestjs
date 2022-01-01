@@ -79,12 +79,9 @@ export class CatsController {
   }
 
   /**
-   * wildcard
+   * 星号会被作为一个wildcard。
+   * The characters ?, +, *, and () may be used in a route path, and are subsets of their regular expression counterparts
    * * match any number of characters
-   * ? match a single alphabet
-   * [] match a single alphabet in a specific position
-   * [!] exclude characters inside the brackets
-   * a-z match a range of characters
    * # match any single numeric character
    *
    * 尝试访问
@@ -93,7 +90,6 @@ export class CatsController {
    * - http://localhost:3001/cats/abbbbbacd?test=t
    */
   @Get('ab*cd')
-  // TODO 搞清楚wildcard的规则
   async wildcard1(@Req() req: Request) {
     console.log(req.query);
     console.log(req.path);
@@ -102,5 +98,29 @@ export class CatsController {
         resolve(`async wildcard 'ab*cd' ${+new Date()}`);
       }, 1000);
     });
+  }
+
+  /**
+   * 正则的测试：?
+   * 尝试访问：
+   * - http://localhost:3001/cats/reg1/testtest?test=t
+   * - http://localhost:3001/cats/reg1/testactest?test=t
+   */
+  @Get('reg1/test(ac)?test')
+  regexptest1(@Req() req: Request) {
+    console.log(req.query);
+    return 'test(ac)?test';
+  }
+
+  /**
+   * 尝试访问：
+   * - http://localhost:3001/cats/reg2/testactest?test=t
+   * - http://localhost:3001/cats/reg2/testacactest?test=t
+   * - http://localhost:3001/cats/reg2/testacacacacacacacacacactest?test=t
+   */
+  @Get('reg2/test(ac)+test')
+  regexptest2(@Req() req: Request) {
+    console.log(req.query);
+    return 'test(ac)+test';
   }
 }
