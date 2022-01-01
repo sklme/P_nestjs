@@ -1,5 +1,5 @@
-import { Controller, Get, Req, Res } from '@nestjs/common';
-import { Response, Request } from 'express';
+import { Controller, Get, Ip, Next, Req, Res } from '@nestjs/common';
+import { Response, Request, NextFunction } from 'express';
 
 @Controller('cats')
 export class CatsController {
@@ -25,6 +25,8 @@ export class CatsController {
 
   /**
    * Library-specific to manipulate response
+   * 只要是inject @Res 或者 @Response 装饰器
+   * 就会进入Library-specific mode
    */
   @Get('library-specific')
   ls(@Res() response: Response) {
@@ -38,5 +40,29 @@ export class CatsController {
   getReqObject(@Req() req: Request) {
     console.log(req.query);
     return 'getReq';
+  }
+
+  /**
+   * 测试所有的装饰器
+   */
+  @Get('testDecorators')
+  testDecorators(
+    @Req() req: Request,
+    @Res() res: Response,
+    @Next() next: NextFunction,
+    @Ip() ip,
+  ) {
+    console.log('request对象');
+    console.log(req);
+    console.log('Next');
+    console.log(next);
+    console.log('IP:');
+    console.log(ip);
+
+    // 返回结果
+    res.status(200).send({
+      name: '测试装饰器',
+      version: '1.0.0',
+    });
   }
 }
