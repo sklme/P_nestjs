@@ -4,6 +4,7 @@ import {
   Get,
   Header,
   HttpCode,
+  HttpStatus,
   Ip,
   Next,
   Param,
@@ -176,5 +177,21 @@ export class CatsController {
   create(@Body() createCatDto: CreateCatDto) {
     console.log(createCatDto);
     return 'This action adds a new cat';
+  }
+
+  /**
+   * library-specific approach
+   */
+
+  @Get('passthrough')
+  passthrough(
+    @Res({
+      passthrough: true,
+    })
+    res: Response,
+  ) {
+    res.status(HttpStatus.OK);
+    console.log('ok');
+    return 'passthrough';
   }
 }
