@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { CatsController } from './cats/cats.controller';
 import { SubDomainRoutingController } from './sub-domain-routing/sub-domain-routing.controller';
 import { DogsController } from './dogs/dogs.controller';
+import { DogsService } from './dogs/dogs.service';
 
 @Module({
   imports: [],
@@ -13,6 +14,6 @@ import { DogsController } from './dogs/dogs.controller';
     SubDomainRoutingController,
     DogsController,
   ],
-  providers: [AppService],
+  providers: [AppService, DogsService],
 })
 export class AppModule {}

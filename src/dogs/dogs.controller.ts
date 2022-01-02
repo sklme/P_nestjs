@@ -8,18 +8,23 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+import { DogsService } from './dogs.service';
 import { CreateDogDto, ListAllEntities, UpdateDogDto } from './dto';
 
 @Controller('dogs')
 export class DogsController {
+  constructor(private dogsService: DogsService) {}
+
   @Post()
   create(@Body() createDogDto: CreateDogDto) {
+    this.dogsService.create(createDogDto);
     return 'This action adds a new dog';
   }
 
   @Get()
-  findAll(@Query() query: ListAllEntities) {
-    return `This action returns all dogs (limit: ${query.limit} items)`;
+  findAll() {
+    return this.dogsService.findAll();
+    // return `This action returns all dogs (limit: ${query.limit} items)`;
   }
 
   @Get(':id')
