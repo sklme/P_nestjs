@@ -2,10 +2,10 @@ import {
   Controller,
   Get,
   Header,
-  Headers,
   HttpCode,
   Ip,
   Next,
+  Param,
   Post,
   Redirect,
   Req,
@@ -137,5 +137,27 @@ export class CatsController {
   regexptest2(@Req() req: Request) {
     console.log(req.query);
     return 'test(ac)+test';
+  }
+
+  /**
+   * Route Parameters
+   * 尝试访问
+   * http://localhost:3001/cats/routeParamater/woof
+   */
+  @Get('routeParamater/:id')
+  rpid(@Param() params: { id: string }) {
+    console.log(params.id);
+    return `This action returns a #${params.id} cat`;
+  }
+
+  /**
+   * Route Parameters
+   * 尝试访问
+   * http://localhost:3001/cats/routeParamater/woof
+   */
+  @Get('routeParamater/:id/tail')
+  rpid2(@Param() params: { id: string }) {
+    console.log(params.id);
+    return `This action returns a #${params.id} cat`;
   }
 }
