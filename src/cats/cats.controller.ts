@@ -156,8 +156,9 @@ export class CatsController {
    * http://localhost:3001/cats/routeParamater/woof
    */
   @Get('routeParamater/:id/tail')
-  rpid2(@Param() params: { id: string }) {
+  rpid2(@Param() params: { id: string }, @Req() req: Request) {
     console.log(params.id);
+    console.log(req.hostname);
     return `This action returns a #${params.id} cat`;
   }
 }
