@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Get,
   Header,
@@ -12,6 +13,12 @@ import {
   Res,
 } from '@nestjs/common';
 import { Response, Request, NextFunction } from 'express';
+
+export class CreateCatDto {
+  name: string;
+  age: number;
+  breed: string;
+}
 
 @Controller('cats')
 export class CatsController {
@@ -62,7 +69,7 @@ export class CatsController {
     @Req() req: Request,
     @Res() res: Response,
     @Next() next: NextFunction,
-    @Ip() ip,
+    @Ip() ip: any,
   ) {
     console.log('request对象');
     console.log(req);
@@ -160,5 +167,14 @@ export class CatsController {
     console.log(params.id);
     console.log(req.hostname);
     return `This action returns a #${params.id} cat`;
+  }
+
+  /**
+   * request payload
+   */
+  @Post('reqPayload')
+  create(@Body() createCatDto: CreateCatDto) {
+    console.log(createCatDto);
+    return 'This action adds a new cat';
   }
 }
