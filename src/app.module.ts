@@ -19,16 +19,20 @@ import { DogsController } from './dogs/dogs.controller';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddlewareClass).forRoutes(
-      // routeinfo
-      {
-        path: 'dogs',
-        method: RequestMethod.GET,
-      },
-      // wildcard
-      'dog*',
-      // Controller
-      DogsController,
-    );
+    consumer
+      .apply(LoggerMiddlewareClass)
+      .exclude({ path: 'dogs/notApplyMiddleware', method: RequestMethod.GET })
+      .forRoutes(
+        // 下面每一个匹配都会执行一个middleware
+        // routeinfo
+        {
+          path: 'dogs*',
+          method: RequestMethod.GET,
+        },
+        // wildcard
+        'dog*',
+        // Controller
+        DogsController,
+      );
   }
 }
