@@ -12,9 +12,10 @@ import { LoggerMiddlewareClass } from './middleware/log-class.middleware';
 import { LogFunc } from './middleware/log-provider';
 import { DogsController } from './dogs/dogs.controller';
 import { LoggerMiddlewareFunc } from './middleware/log-func.middleware';
+import { ExceptionModule } from './exceptions/exceptions.module';
 
 @Module({
-  imports: [DogsModule, CatsModule],
+  imports: [DogsModule, CatsModule, ExceptionModule],
   controllers: [AppController],
   providers: [AppService, LogFunc],
 })
