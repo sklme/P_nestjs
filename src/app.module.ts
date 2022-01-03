@@ -11,6 +11,7 @@ import { CatsModule } from './cats/cats.module';
 import { LoggerMiddlewareClass } from './middleware/log-class.middleware';
 import { LogFunc } from './middleware/log-provider';
 import { DogsController } from './dogs/dogs.controller';
+import { LoggerMiddlewareFunc } from './middleware/log-func.middleware';
 
 @Module({
   imports: [DogsModule, CatsModule],
@@ -20,7 +21,7 @@ import { DogsController } from './dogs/dogs.controller';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(LoggerMiddlewareClass)
+      .apply(LoggerMiddlewareClass, LoggerMiddlewareFunc)
       .exclude({ path: 'dogs/notApplyMiddleware', method: RequestMethod.GET })
       .forRoutes(
         // 下面每一个匹配都会执行一个middleware
