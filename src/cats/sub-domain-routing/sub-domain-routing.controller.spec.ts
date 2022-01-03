@@ -9,7 +9,9 @@ describe('SubDomainRoutingController', () => {
       controllers: [SubDomainRoutingController],
     }).compile();
 
-    controller = module.get<SubDomainRoutingController>(SubDomainRoutingController);
+    controller = module.get<SubDomainRoutingController>(
+      SubDomainRoutingController,
+    );
   });
 
   it('should be defined', () => {
