@@ -5,5 +5,6 @@ import { SubDomainRoutingModule } from './sub-domain-routing/sub-domain-routing.
 @Module({
   imports: [SubDomainRoutingModule],
   controllers: [CatsController],
+  exports: [SubDomainRoutingModule],
 })
 export class CatsModule {}
