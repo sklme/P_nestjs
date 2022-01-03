@@ -13,11 +13,20 @@ import { LogFunc } from './middleware/log-provider';
 import { DogsController } from './dogs/dogs.controller';
 import { LoggerMiddlewareFunc } from './middleware/log-func.middleware';
 import { ExceptionModule } from './exceptions/exceptions.module';
+import { APP_FILTER } from '@nestjs/core';
+import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 
 @Module({
   imports: [DogsModule, CatsModule, ExceptionModule],
   controllers: [AppController],
-  providers: [AppService, LogFunc],
+  providers: [
+    AppService,
+    LogFunc,
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
