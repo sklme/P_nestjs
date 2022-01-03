@@ -1,10 +1,36 @@
-import { Controller, Get, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  BadGatewayException,
+  BadRequestException,
+  ConflictException,
+  Controller,
+  ForbiddenException,
+  GatewayTimeoutException,
+  Get,
+  GoneException,
+  HttpException,
+  HttpStatus,
+  HttpVersionNotSupportedException,
+  ImATeapotException,
+  MethodNotAllowedException,
+  NotAcceptableException,
+  NotFoundException,
+  NotImplementedException,
+  PayloadTooLargeException,
+  PreconditionFailedException,
+  RequestTimeoutException,
+  ServiceUnavailableException,
+  UnauthorizedException,
+  UnprocessableEntityException,
+  UnsupportedMediaTypeException,
+} from '@nestjs/common';
 import { ExceptionService } from './exceptions.service';
+import { MyForbiddenException } from './forbidden.exception';
 
 @Controller('exception-filters')
 export class ExceptionController {
   constructor(private exceptionService: ExceptionService) {}
 
+  //#region standard exceptions
   @Get()
   root() {
     // return '123';
@@ -26,5 +52,33 @@ export class ExceptionController {
       },
       HttpStatus.FORBIDDEN,
     );
+  }
+  //#endregion standard exceptions
+
+  @Get('custom-forbidden')
+  cforbidden() {
+    throw new MyForbiddenException();
+  }
+
+  @Get('built-in-http-exception')
+  builtIn() {
+    // throw new BadRequestException();
+    // throw new UnauthorizedException();
+    // throw new NotFoundException();
+    // throw new ForbiddenException();
+    // throw new NotAcceptableException();
+    // throw new RequestTimeoutException();
+    // throw new ConflictException();
+    // throw new GoneException();
+    // throw new HttpVersionNotSupportedException();
+    // throw new PayloadTooLargeException();
+    // throw new UnsupportedMediaTypeException();
+    // throw new UnprocessableEntityException();
+    // throw new ImATeapotException();
+    // throw new MethodNotAllowedException();
+    // throw new BadGatewayException();
+    // throw new ServiceUnavailableException();
+    // throw new GatewayTimeoutException();
+    throw new PreconditionFailedException();
   }
 }
