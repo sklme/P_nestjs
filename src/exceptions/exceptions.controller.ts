@@ -22,9 +22,11 @@ import {
   UnauthorizedException,
   UnprocessableEntityException,
   UnsupportedMediaTypeException,
+  UseFilters,
 } from '@nestjs/common';
 import { ExceptionService } from './exceptions.service';
 import { MyForbiddenException } from './forbidden.exception';
+import { HttpExceptionFilter } from './http-exception.filter';
 
 @Controller('exception-filters')
 export class ExceptionController {
@@ -80,5 +82,11 @@ export class ExceptionController {
     // throw new ServiceUnavailableException();
     // throw new GatewayTimeoutException();
     throw new PreconditionFailedException();
+  }
+
+  @Get('exception-filter')
+  @UseFilters(HttpExceptionFilter)
+  exfilter() {
+    throw new ForbiddenException();
   }
 }
