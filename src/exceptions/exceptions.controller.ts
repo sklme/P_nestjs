@@ -29,7 +29,7 @@ import { MyForbiddenException } from './forbidden.exception';
 import { HttpExceptionFilter } from './http-exception.filter';
 
 @Controller('exception-filters')
-@UseFilters(HttpExceptionFilter)
+// @UseFilters(HttpExceptionFilter)
 export class ExceptionController {
   constructor(private exceptionService: ExceptionService) {}
 
