@@ -19,6 +19,7 @@
     "noFallthroughCasesInSwitch": false,
 
     // 上面是nestjs默认，下面是自定义
-    "strict": true
+    "strict": true,
+    "esModuleInterop": true // 配合allowSyntheticDefaultImports使用，可以不用处理import * as x
   }
 }
