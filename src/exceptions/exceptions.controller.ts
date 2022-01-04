@@ -29,6 +29,7 @@ import { AllExceptionsFilter } from './catch-everything.filter';
 import { ExceptionService } from './exceptions.service';
 import { MyForbiddenException } from './forbidden.exception';
 import { HttpExceptionFilter } from './http-exception.filter';
+import { AllExceptionsFilterInheritFromBaseExceptionFilter } from './inherite-exception.filter';
 
 @Controller('exception-filters')
 // @UseFilters(HttpExceptionFilter)
@@ -100,6 +101,24 @@ export class ExceptionController {
       throw new Error('我最厉害');
     } else {
       return 'exception-catch-everything';
+    }
+  }
+
+  @Get('exception-filter-inheritance')
+  @UseFilters(AllExceptionsFilterInheritFromBaseExceptionFilter)
+  inheritance(@Query() query: { mode: string }) {
+    if (query.mode === '1') {
+      // throw new Error('会被exception filter捕捉');
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          msg: '一个自定义的错误',
+          extraMsg: '问题很严重',
+        },
+        HttpStatus.FORBIDDEN,
+      );
+    } else {
+      return 'exception-filter-inheritance';
     }
   }
 }
