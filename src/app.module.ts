@@ -15,9 +15,10 @@ import { LoggerMiddlewareFunc } from './middleware/log-func.middleware';
 import { ExceptionModule } from './exceptions/exceptions.module';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionFilter } from './exceptions/http-exception.filter';
+import { PipeModule } from './pipe/pipe.module';
 
 @Module({
-  imports: [DogsModule, CatsModule, ExceptionModule],
+  imports: [DogsModule, CatsModule, ExceptionModule, PipeModule],
   controllers: [AppController],
   providers: [
     AppService,
