@@ -18,6 +18,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
     const status = exception.getStatus();
+    const errMsg = exception.message;
+    const errName = exception.name;
 
     // 模拟一个log
     console.log('发生了一个错误');
@@ -27,6 +29,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
     // 返回
     response.status(status).json({
       statusCode: status,
+      errMsg,
+      errName,
       timestamp: new Date().toISOString(),
       path: request.url,
     });
