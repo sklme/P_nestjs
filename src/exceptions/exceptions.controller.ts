@@ -17,6 +17,7 @@ import {
   NotImplementedException,
   PayloadTooLargeException,
   PreconditionFailedException,
+  Query,
   RequestTimeoutException,
   ServiceUnavailableException,
   UnauthorizedException,
@@ -24,6 +25,7 @@ import {
   UnsupportedMediaTypeException,
   UseFilters,
 } from '@nestjs/common';
+import { AllExceptionsFilter } from './catch-everything.filter';
 import { ExceptionService } from './exceptions.service';
 import { MyForbiddenException } from './forbidden.exception';
 import { HttpExceptionFilter } from './http-exception.filter';
@@ -88,5 +90,16 @@ export class ExceptionController {
   @Get('exception-filter')
   exfilter() {
     throw new ForbiddenException();
+  }
+
+  @Get('exception-catch-everything')
+  @UseFilters(AllExceptionsFilter)
+  catchAll(@Query() query: { mode: string }) {
+    // throw new ForbiddenException();
+    if (query.mode === '1') {
+      throw new Error('我最厉害');
+    } else {
+      return 'exception-catch-everything';
+    }
   }
 }
