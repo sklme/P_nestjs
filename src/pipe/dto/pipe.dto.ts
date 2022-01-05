@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsInt, IsNumberString, IsString } from 'class-validator';
+import { IsInt, IsNumber, IsNumberString, IsString } from 'class-validator';
 
 export class CustomPipeDto {
   name: string;

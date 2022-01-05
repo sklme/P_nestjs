@@ -94,8 +94,24 @@ export class PipeController {
    * 内置的validatePipe
    */
   @Get('built-in-validation-pipe/:id')
-  @UsePipes(ValidationPipe)
-  btvp(@Param() param: IDSubRouteDto) {
+  @UsePipes(
+    new ValidationPipe({
+      // disableErrorMessages: true,
+      whitelist: true, // 去掉没有在dto定义的属性
+      // forbidNonWhitelisted: true, // 如果提供了不在dto的数据，就抛出错误
+      transform: true, // 是否转化为dto对象，如果指定的type是primitive type，会尝试转为对应的primitive type，比如下面的id
+    }),
+  )
+  btvp(
+    @Param() param: IDSubRouteDto,
+    @Param('id') id: number,
+    @Query() query: ClassCustomPipeDto,
+    @Query('age', ParseIntPipe) age: number,
+  ) {
+    console.log(query);
+    console.log(param);
+    console.log(id);
+    console.log(age);
     //
     const response = `
     param.id: ${param.id} <br>
@@ -104,4 +120,8 @@ export class PipeController {
 
     return response;
   }
+
+  /**
+   *
+   */
 }

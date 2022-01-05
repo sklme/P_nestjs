@@ -23,10 +23,10 @@ import { PipeModule } from './pipe/pipe.module';
   providers: [
     AppService,
     LogFunc,
-    {
-      provide: APP_FILTER,
-      useClass: HttpExceptionFilter,
-    },
+    // {
+    //   provide: APP_FILTER,
+    //   useClass: HttpExceptionFilter,
+    // },
   ],
 })
 export class AppModule implements NestModule {
