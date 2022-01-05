@@ -6,6 +6,8 @@ import {
   ParseIntPipe,
   Query,
 } from '@nestjs/common';
+import { joiSchema, MyValidationPipe } from 'src/pipes/myValidatePipe';
+import { CustomPipeDto } from './dto/pipe.dto';
 import { PipeService } from './pipe.service';
 
 @Controller('pipe')
@@ -39,5 +41,14 @@ export class PipeController {
     id: number,
   ) {
     return this.pipeSerivce.handleNumber(id);
+  }
+
+  /**
+   * 自定义的pipe
+   */
+  @Get('custom-pipe')
+  customPipe(@Query(new MyValidationPipe(joiSchema)) query: CustomPipeDto) {
+    console.log(query);
+    return query;
   }
 }
