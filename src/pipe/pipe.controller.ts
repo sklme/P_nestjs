@@ -5,8 +5,9 @@ import {
   HttpStatus,
   ParseIntPipe,
   Query,
+  UsePipes,
 } from '@nestjs/common';
-import { joiSchema, MyValidationPipe } from 'src/pipes/myValidatePipe';
+import { joiSchema, JoiValidationPipe } from 'src/pipes/myValidatePipe';
 import { CustomPipeDto } from './dto/pipe.dto';
 import { PipeService } from './pipe.service';
 
@@ -45,10 +46,23 @@ export class PipeController {
 
   /**
    * 自定义的pipe
+   * 使用schema验证
+   * 只用在Query装饰器上
    */
   @Get('custom-pipe')
-  customPipe(@Query(new MyValidationPipe(joiSchema)) query: CustomPipeDto) {
+  customPipe(@Query(new JoiValidationPipe(joiSchema)) query: CustomPipeDto) {
     console.log(query);
+    return query;
+  }
+
+  /**
+   * 自定义的pipe
+   * 使用schema验证
+   * 用在整个方法上
+   */
+  @Get('custom-pipe2')
+  @UsePipes(new JoiValidationPipe(joiSchema))
+  customPipe2(@Query() query: CustomPipeDto) {
     return query;
   }
 }

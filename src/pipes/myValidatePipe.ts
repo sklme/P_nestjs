@@ -15,16 +15,20 @@ export const joiSchema = Joi.object({
 });
 
 @Injectable()
-export class MyValidationPipe implements PipeTransform {
+export class JoiValidationPipe implements PipeTransform {
   constructor(private schema: ObjectSchema) {}
-  transform(value: unknown, metadata: ArgumentMetadata) {
+  transform(
+    value: unknown,
+    // metadata: ArgumentMetadata
+  ) {
     // console.log(metadata);
     // console.log(metadata.data);
     // console.log(metadata.metatype);
     // console.log(metadata.type);
     const { error } = this.schema.validate(value);
-    console.log(error);
+    console.log('执行了验证');
     if (error) {
+      console.log('发生了错误');
       throw new BadRequestException('请求参数验证失败');
     }
     return value;
