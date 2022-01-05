@@ -7,13 +7,18 @@ import {
   ParseIntPipe,
   Query,
   UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import {
   ClassValidationPipe,
   joiSchema,
   JoiValidationPipe,
 } from 'src/pipes/myValidatePipe';
-import { ClassCustomPipeDto, CustomPipeDto } from './dto/pipe.dto';
+import {
+  ClassCustomPipeDto,
+  CustomPipeDto,
+  IDSubRouteDto,
+} from './dto/pipe.dto';
 import { PipeService } from './pipe.service';
 
 @Controller('pipe')
@@ -83,5 +88,20 @@ export class PipeController {
   ) {
     console.log(test);
     return query;
+  }
+
+  /**
+   * 内置的validatePipe
+   */
+  @Get('built-in-validation-pipe/:id')
+  @UsePipes(ValidationPipe)
+  btvp(@Param() param: IDSubRouteDto) {
+    //
+    const response = `
+    param.id: ${param.id} <br>
+    虽然Dto把id定义为number，但实际上这里还是${typeof param.id}
+    `;
+
+    return response;
   }
 }

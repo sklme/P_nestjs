@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsInt, IsString } from 'class-validator';
+import { IsInt, IsNumberString, IsString } from 'class-validator';
 
 export class CustomPipeDto {
   name: string;
@@ -21,5 +21,10 @@ export class ClassCustomPipeDto {
 
   @IsInt()
   @Type(() => Number)
+  id: number;
+}
+
+export class IDSubRouteDto {
+  @IsNumberString()
   id: number;
 }
