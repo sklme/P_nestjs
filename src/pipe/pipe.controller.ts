@@ -81,6 +81,7 @@ export class PipeController {
     @Query() query: ClassCustomPipeDto,
     @Param('test') test: string,
   ) {
+    console.log(test);
     return query;
   }
 }
