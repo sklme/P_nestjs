@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  DefaultValuePipe,
   Get,
   HttpException,
   HttpStatus,
@@ -241,4 +242,12 @@ export class PipeController {
     return ids;
   }
   //#endregion Parsing and validating array
+
+  //#region defult value
+  @Get('default-value')
+  dv(@Query('dv', new DefaultValuePipe(20), ParseIntPipe) dv: number) {
+    console.log(dv);
+    return dv;
+  }
+  //#endregion  default value
 }
