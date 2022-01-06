@@ -5,15 +5,7 @@ import {
   PickType,
 } from '@nestjs/mapped-types';
 import { Type } from 'class-transformer';
-import {
-  IsInt,
-  isNumber,
-  IsNumber,
-  IsNumberString,
-  IsString,
-  Max,
-  Min,
-} from 'class-validator';
+import { IsInt, IsNumberString, IsString, Max, Min } from 'class-validator';
 
 export class CustomPipeDto {
   name: string;

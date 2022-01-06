@@ -1,10 +1,13 @@
 import {
+  Body,
   Controller,
   Get,
   HttpException,
   HttpStatus,
   Param,
+  ParseArrayPipe,
   ParseIntPipe,
+  Post,
   Query,
   UsePipes,
   ValidationPipe,
@@ -192,4 +195,25 @@ export class PipeController {
     return query;
   }
   //#endregion mappedType
+
+  //#region Parsing and validating array
+  @Post('parser-array-pipe')
+  @UsePipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+    }),
+  )
+  pap(
+    @Body(
+      new ParseArrayPipe({
+        items: ClassCustomPipeDto,
+      }),
+    )
+    classCustomPipeDtos: ClassCustomPipeDto[],
+  ) {
+    console.log(classCustomPipeDtos);
+    return classCustomPipeDtos;
+  }
+  //#endregion Parsing and validating array
 }
