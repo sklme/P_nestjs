@@ -197,7 +197,8 @@ export class PipeController {
   //#endregion mappedType
 
   //#region Parsing and validating array
-  @Post('parser-array-pipe')
+  // validate array in Body
+  @Post('parse-array-pipe')
   @UsePipes(
     new ValidationPipe({
       transform: true,
@@ -214,6 +215,30 @@ export class PipeController {
   ) {
     console.log(classCustomPipeDtos);
     return classCustomPipeDtos;
+  }
+
+  // validate array in querystring
+  @Get('parse-array-pipe')
+  @UsePipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+    }),
+  )
+  papg(
+    @Query(
+      'ids',
+      new ParseArrayPipe({
+        items: Number,
+        separator: ',',
+      }),
+    )
+    ids: number[],
+  ) {
+    //
+
+    console.log(ids);
+    return ids;
   }
   //#endregion Parsing and validating array
 }
