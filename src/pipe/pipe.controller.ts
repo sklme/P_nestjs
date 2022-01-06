@@ -18,6 +18,9 @@ import {
   ClassCustomPipeDto,
   CustomPipeDto,
   IDSubRouteDto,
+  MappedTypeDto,
+  PartialMappedTypeDto,
+  PickMappedTypeDto,
 } from './dto/pipe.dto';
 import { PipeService } from './pipe.service';
 
@@ -97,7 +100,7 @@ export class PipeController {
   @UsePipes(
     new ValidationPipe({
       // disableErrorMessages: true,
-      whitelist: true, // 去掉没有在dto定义的属性
+      // whitelist: true, // 去掉没有在dto定义的属性
       // forbidNonWhitelisted: true, // 如果提供了不在dto的数据，就抛出错误
       transform: true, // 是否转化为dto对象，如果指定的type是primitive type，会尝试转为对应的primitive type，比如下面的id
     }),
@@ -121,7 +124,45 @@ export class PipeController {
     return response;
   }
 
+  //#region mappedType
   /**
-   *
+   * 相当于ts的util type
    */
+  @Get('mapped-type-basic')
+  @UsePipes(
+    new ValidationPipe({
+      transform: true,
+    }),
+  )
+  mtb(@Query() query: MappedTypeDto) {
+    console.log(query);
+    return query;
+  }
+
+  // partial
+  @Get('mapped-type-partial')
+  @UsePipes(
+    new ValidationPipe({
+      transform: true,
+    }),
+  )
+  mtp(@Query() query: PartialMappedTypeDto) {
+    console.log(query);
+    return query;
+  }
+
+  // pick
+  @Get('mapped-type-pick')
+  @UsePipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+    }),
+  )
+  mtpick(@Query() query: PickMappedTypeDto) {
+    console.log(query);
+    return query;
+  }
+
+  //#endregion mappedType
 }
