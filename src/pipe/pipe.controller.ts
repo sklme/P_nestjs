@@ -18,7 +18,9 @@ import {
   ClassCustomPipeDto,
   CustomPipeDto,
   IDSubRouteDto,
+  IntersectionMappedTypeDto,
   MappedTypeDto,
+  OmitMappedTypeDto,
   PartialMappedTypeDto,
   PickMappedTypeDto,
 } from './dto/pipe.dto';
@@ -164,5 +166,30 @@ export class PipeController {
     return query;
   }
 
+  // omit
+  @Get('mapped-type-omit')
+  @UsePipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+    }),
+  )
+  mto(@Query() query: OmitMappedTypeDto) {
+    console.log(query);
+    return query;
+  }
+
+  // intersection
+  @Get('mapped-type-intersection')
+  @UsePipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+    }),
+  )
+  mti(@Query() query: IntersectionMappedTypeDto) {
+    console.log(query);
+    return query;
+  }
   //#endregion mappedType
 }

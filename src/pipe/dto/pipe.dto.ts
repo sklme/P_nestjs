@@ -1,4 +1,9 @@
-import { PartialType, PickType } from '@nestjs/mapped-types';
+import {
+  IntersectionType,
+  OmitType,
+  PartialType,
+  PickType,
+} from '@nestjs/mapped-types';
 import { Type } from 'class-transformer';
 import {
   IsInt,
@@ -51,6 +56,12 @@ export class MappedTypeDto {
   age: number;
 }
 
+class MappedTypeDtoForIntersection {
+  @IsInt()
+  @Type(() => Number)
+  grape: number;
+}
+
 // Patial
 export class PartialMappedTypeDto extends PartialType(MappedTypeDto) {}
 
@@ -58,4 +69,15 @@ export class PartialMappedTypeDto extends PartialType(MappedTypeDto) {}
 export class PickMappedTypeDto extends PickType(MappedTypeDto, [
   'age',
 ] as const) {}
+
+// Omit
+export class OmitMappedTypeDto extends OmitType(MappedTypeDto, [
+  'age',
+] as const) {}
+
+// intersection
+export class IntersectionMappedTypeDto extends IntersectionType(
+  MappedTypeDto,
+  MappedTypeDtoForIntersection,
+) {}
 //#endregion mappedType
