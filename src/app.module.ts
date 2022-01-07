@@ -19,6 +19,7 @@ import { PipeModule } from './pipe/pipe.module';
 import { ConfigModule } from '@nestjs/config';
 import { ModuleConfigTestModule } from './module-config-test/module-config-test.module';
 import databaseConfigGroup from './config/databaseConfigGroup';
+import githubConfigNamespace from './config/githubConfigNamespace';
 
 @Module({
   imports: [
@@ -28,7 +29,7 @@ import databaseConfigGroup from './config/databaseConfigGroup';
     PipeModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [databaseConfigGroup],
+      load: [databaseConfigGroup, githubConfigNamespace],
     }),
     ModuleConfigTestModule,
   ],

@@ -8,13 +8,18 @@ export interface Database {
   port: number;
 }
 
-type MapEnvType<Type, Prefix extends string> = {
-  [P in keyof Type as `${Prefix}.${P & string}`]: Type[P];
-};
+export interface Github {
+  token: string;
+  port: number;
+}
 
-type DatabaseWithPrefix = MapEnvType<Database, 'database'>;
+// type MapEnvType<Type, Prefix extends string> = {
+//   [P in keyof Type as `${Prefix}.${P & string}`]: Type[P];
+// };
 
-export interface EnvVars extends DatabaseWithPrefix {
+// type DatabaseWithPrefix = MapEnvType<Database, 'database'>;
+
+export interface EnvVars {
   DATABASE_USER: string;
   DATABASE_PASSWORD: string;
   DATABASE_HOST: string;
@@ -23,6 +28,7 @@ export interface EnvVars extends DatabaseWithPrefix {
   PORT: number;
   DATABASE_PORT: number;
   database: Database;
+  github: Github;
   // 'database.host': string;
   // 'database.port': number;
 }

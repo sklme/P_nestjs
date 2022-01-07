@@ -25,4 +25,12 @@ export class ModuleConfigTestService {
     });
     return databaseEnv;
   }
+
+  getGithubEnv() {
+    const githubEnv = this.configService.get('github', {
+      infer: true,
+    });
+
+    return githubEnv;
+  }
 }

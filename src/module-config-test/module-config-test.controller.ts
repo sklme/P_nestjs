@@ -24,4 +24,9 @@ export class ModuleConfigTestController {
     const env = this.service.getDatabaseEnv();
     return env;
   }
+
+  @Get('github-env')
+  githubEnv() {
+    return this.service.getGithubEnv();
+  }
 }
