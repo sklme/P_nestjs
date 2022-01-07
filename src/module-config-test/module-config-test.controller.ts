@@ -5,6 +5,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { EnvVars } from 'src/config/envShape';
 import { ModuleConfigTestService } from './module-config-test.service';
 
 @Controller('module-config-test')
@@ -13,7 +14,7 @@ export class ModuleConfigTestController {
 
   @Get('get-env')
   @UsePipes(ValidationPipe)
-  index(@Query('key') key: string) {
+  index(@Query('key') key: keyof EnvVars) {
     return this.service.getEnv(key);
   }
 
