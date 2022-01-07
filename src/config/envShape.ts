@@ -29,6 +29,7 @@ export interface EnvVars {
   DATABASE_PORT: number;
   database: Database;
   github: Github;
+  DATABASE_FULL_HOST: string;
   // 'database.host': string;
   // 'database.port': number;
 }

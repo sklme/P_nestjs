@@ -29,6 +29,7 @@ import githubConfigNamespace from './config/githubConfigNamespace';
     PipeModule,
     ConfigModule.forRoot({
       isGlobal: true,
+      expandVariables: true,
       load: [databaseConfigGroup, githubConfigNamespace],
     }),
     ModuleConfigTestModule,
