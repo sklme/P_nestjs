@@ -16,9 +16,22 @@ import { ExceptionModule } from './exceptions/exceptions.module';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 import { PipeModule } from './pipe/pipe.module';
+import { ConfigModule } from '@nestjs/config';
+import { ModuleConfigTestModule } from './module-config-test/module-config-test.module';
+import databaseConfigGroup from './config/databaseConfigGroup';
 
 @Module({
-  imports: [DogsModule, CatsModule, ExceptionModule, PipeModule],
+  imports: [
+    DogsModule,
+    CatsModule,
+    ExceptionModule,
+    PipeModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [databaseConfigGroup],
+    }),
+    ModuleConfigTestModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,
