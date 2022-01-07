@@ -6,6 +6,7 @@ import { EnvVars } from 'src/config/envShape';
 export class ModuleConfigTestService {
   constructor(private configService: ConfigService<EnvVars>) {}
 
+  // TODO: 这里其实并不是keyof EnvVars，nest这里自己用了一个Path<T>来表示，但没有export出来，看一下咋解决
   getEnv(key: keyof EnvVars) {
     // const value = this.configService.get<unknown>(key, undefined);
 
