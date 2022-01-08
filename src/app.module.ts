@@ -18,6 +18,7 @@ import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 import { PipeModule } from './pipe/pipe.module';
 import { ConfigModule } from '@nestjs/config';
 import { ModuleConfigTestModule } from './module-config-test/module-config-test.module';
+import { MyConfigModuleModule } from './my-config-module/my-config-module.module';
 import databaseConfigGroup from './config/databaseConfigGroup';
 import githubConfigNamespace from './config/githubConfigNamespace';
 
@@ -33,6 +34,9 @@ import githubConfigNamespace from './config/githubConfigNamespace';
       load: [databaseConfigGroup, githubConfigNamespace],
     }),
     ModuleConfigTestModule,
+    MyConfigModuleModule.register({
+      folder: '.',
+    }),
   ],
   controllers: [AppController],
   providers: [
