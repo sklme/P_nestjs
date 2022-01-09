@@ -19,6 +19,7 @@ import { PipeModule } from './pipe/pipe.module';
 import { ConfigModule } from '@nestjs/config';
 import { ModuleConfigTestModule } from './module-config-test/module-config-test.module';
 import { MyConfigModuleModule } from './my-config-module/my-config-module.module';
+import { CustomProviderModule } from './custom-provider/custom-provider.module';
 import databaseConfigGroup from './config/databaseConfigGroup';
 import githubConfigNamespace from './config/githubConfigNamespace';
 
@@ -37,6 +38,7 @@ import githubConfigNamespace from './config/githubConfigNamespace';
     MyConfigModuleModule.register({
       folder: '.',
     }),
+    CustomProviderModule,
   ],
   controllers: [AppController],
   providers: [
