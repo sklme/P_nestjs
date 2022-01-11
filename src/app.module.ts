@@ -21,6 +21,7 @@ import { ModuleConfigTestModule } from './module-config-test/module-config-test.
 import { MyConfigModuleModule } from './my-config-module/my-config-module.module';
 import { CustomProviderModule } from './custom-provider/custom-provider.module';
 import { GuideModule } from './guard-test/guard.module';
+import { InterceptorTestModule } from './interceptor-test/interceptor-test.module';
 import databaseConfigGroup from './config/databaseConfigGroup';
 import githubConfigNamespace from './config/githubConfigNamespace';
 
@@ -41,6 +42,7 @@ import githubConfigNamespace from './config/githubConfigNamespace';
     }),
     CustomProviderModule,
     GuideModule,
+    InterceptorTestModule,
   ],
   controllers: [AppController],
   providers: [
