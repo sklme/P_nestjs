@@ -23,7 +23,9 @@ export class UserEntity {
   @IsString()
   email: string;
 
-  @IsString()
+  @IsString({
+    each: true,
+  })
   roles: string[];
 }
 

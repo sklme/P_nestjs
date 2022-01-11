@@ -9,7 +9,9 @@ describe('CustomDecoratorsController', () => {
       controllers: [CustomDecoratorsController],
     }).compile();
 
-    controller = module.get<CustomDecoratorsController>(CustomDecoratorsController);
+    controller = module.get<CustomDecoratorsController>(
+      CustomDecoratorsController,
+    );
   });
 
   it('should be defined', () => {
