@@ -20,6 +20,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ModuleConfigTestModule } from './module-config-test/module-config-test.module';
 import { MyConfigModuleModule } from './my-config-module/my-config-module.module';
 import { CustomProviderModule } from './custom-provider/custom-provider.module';
+import { GuideModule } from './guard-test/guard.module';
 import databaseConfigGroup from './config/databaseConfigGroup';
 import githubConfigNamespace from './config/githubConfigNamespace';
 
@@ -39,6 +40,7 @@ import githubConfigNamespace from './config/githubConfigNamespace';
       folder: '.',
     }),
     CustomProviderModule,
+    GuideModule,
   ],
   controllers: [AppController],
   providers: [
