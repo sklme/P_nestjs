@@ -1,4 +1,5 @@
 import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
+import { CacheInterceptor } from './interceptor/cache.interceptor';
 import { LoggingInterceptor } from './interceptor/logging.interceptor';
 import { TimeoutInterceptor } from './interceptor/timeout.interceptor';
 import { TransformInterceptor } from './interceptor/transform.interceptor';
@@ -27,5 +28,11 @@ export class InterceptorTestController {
     return new Promise((resolve) => {
       setTimeout(() => resolve('done'), timeout);
     });
+  }
+
+  @Get('stream-overriding')
+  @UseInterceptors(CacheInterceptor)
+  streamOverriding() {
+    return '没有使用缓存';
   }
 }
