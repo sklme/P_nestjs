@@ -1,9 +1,12 @@
 import { Module, Scope } from '@nestjs/common';
-import { InjectionScopesController } from './injection-scopes.controller';
+import {
+  DefaultScopeController,
+  InjectionScopesController,
+} from './injection-scopes.controller';
 import { InjectionScopesService } from './injection-scopes.service';
 
 @Module({
-  controllers: [InjectionScopesController],
+  controllers: [InjectionScopesController, DefaultScopeController],
   providers: [
     InjectionScopesService,
     {
