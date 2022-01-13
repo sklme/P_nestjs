@@ -24,6 +24,7 @@ import { GuideModule } from './guard-test/guard.module';
 import { InterceptorTestModule } from './interceptor-test/interceptor-test.module';
 import { CustomDecoratorsModule } from './custom-decorators/custom-decorators.module';
 import { InjectionScopesModule } from './injection-scopes/injection-scopes.module';
+import { CircularDenModule } from './circular-den/circular-den.module';
 import databaseConfigGroup from './config/databaseConfigGroup';
 import githubConfigNamespace from './config/githubConfigNamespace';
 
@@ -47,6 +48,7 @@ import githubConfigNamespace from './config/githubConfigNamespace';
     InterceptorTestModule,
     CustomDecoratorsModule,
     InjectionScopesModule,
+    CircularDenModule,
   ],
   controllers: [AppController],
   providers: [
