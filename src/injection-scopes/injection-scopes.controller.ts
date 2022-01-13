@@ -1,4 +1,6 @@
 import { Controller, Get, Inject, Scope } from '@nestjs/common';
+import { REQUEST } from '@nestjs/core';
+import { Request } from 'express';
 import { InjectionScopesService } from './injection-scopes.service';
 
 @Controller({
@@ -11,6 +13,10 @@ import { InjectionScopesService } from './injection-scopes.service';
 })
 export class InjectionScopesController {
   requestTimes = 0;
+
+  @Inject(REQUEST)
+  request: Request;
+
   constructor(
     private service: InjectionScopesService,
     @Inject('custom-provider-with-scope')
@@ -40,6 +46,13 @@ export class InjectionScopesController {
     `;
 
     return returnMsg;
+  }
+
+  @Get('get-request')
+  getRequest() {
+    const request = this.service.getRequest();
+    console.log(this.request === request); // true
+    return request.path + ', ' + this.request.path;
   }
 }
 
