@@ -2,6 +2,7 @@ import { Controller, Get, Inject, OnModuleInit } from '@nestjs/common';
 import { ContextIdFactory, ModuleRef, REQUEST } from '@nestjs/core';
 import { Request } from 'express';
 import { ModuleRefService } from './module-ref.service';
+import { NotInjectableClass } from './providers/not-injectable.provider';
 import { RequstScopeProviderForModuleRefTest } from './providers/request-scope.provider';
 
 @Controller('module-ref')
@@ -99,5 +100,13 @@ export class ModuleRefController implements OnModuleInit {
       );
 
     return customProvider.getAnotherProviderByCurrentIdentifier();
+  }
+
+  @Get('resolve-not-injectable')
+  async notInjectable() {
+    //
+    const provider = await this.moduleRef.create(NotInjectableClass);
+
+    return provider.test();
   }
 }
