@@ -1,5 +1,5 @@
 import { Controller, Get, OnModuleInit } from '@nestjs/common';
-import { ModuleRef } from '@nestjs/core';
+import { ContextIdFactory, ModuleRef } from '@nestjs/core';
 import { ModuleRefService } from './module-ref.service';
 import { RequstScopeProviderForModuleRefTest } from './providers/request-scope.provider';
 
@@ -37,5 +37,21 @@ export class ModuleRefController implements OnModuleInit {
     console.log('is 0 and 1 equal?', providers[0] === providers[1]); // false
 
     return 'The resolve() method returns a unique instance of the provider, from its own DI container sub-tree. Each sub-tree has a unique context identifier. Thus, if you call this method more than once and compare instance references, you will see that they are not equal.';
+  }
+
+  @Get('context-id')
+  async contextId() {
+    //
+    const contextId = ContextIdFactory.create();
+    const providers = await Promise.all([
+      this.moduleRef.resolve(RequstScopeProviderForModuleRefTest, contextId),
+      this.moduleRef.resolve(RequstScopeProviderForModuleRefTest, contextId),
+    ]);
+    console.log('is 0 and 1 equal?', providers[0] === providers[1]); // true
+
+    const str = `if pass context id,
+    resolve can return same provider`;
+
+    return str;
   }
 }
