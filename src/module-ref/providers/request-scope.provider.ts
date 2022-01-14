@@ -1,12 +1,14 @@
 import { Inject, Injectable, Scope } from '@nestjs/common';
-import { REQUEST } from '@nestjs/core';
+import { ContextIdFactory, ModuleRef, REQUEST } from '@nestjs/core';
 import { Request } from 'express';
+import { AnotherScopeProviderForModuleRefTest } from './another-scope-provider.provider';
 
 @Injectable({
   scope: Scope.REQUEST,
 })
 export class RequstScopeProviderForModuleRefTest {
   @Inject(REQUEST) request: Request;
+  @Inject() moduleRef: ModuleRef;
 
   test() {
     return 'I am RequstScopeProviderForModuleRefTest';
@@ -21,5 +23,16 @@ export class RequstScopeProviderForModuleRefTest {
     }
 
     return 'request obj is undefined';
+  }
+
+  async getAnotherProviderByCurrentIdentifier() {
+    //
+    const contextId = ContextIdFactory.getByRequest(this.request);
+    const another = await this.moduleRef.resolve(
+      AnotherScopeProviderForModuleRefTest,
+      contextId,
+    );
+
+    return another.checkRequestObj();
   }
 }

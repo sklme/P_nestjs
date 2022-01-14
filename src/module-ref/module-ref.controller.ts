@@ -85,4 +85,19 @@ export class ModuleRefController implements OnModuleInit {
 
     return customProvider.checkRequestObj();
   }
+
+  @Get('get-current-sub-tree')
+  async getCurrentSubTree() {
+    //
+    const contextId = ContextIdFactory.create();
+    this.moduleRef.registerRequestByContextId(this.request, contextId);
+
+    const customProvider: RequstScopeProviderForModuleRefTest =
+      await this.moduleRef.resolve(
+        RequstScopeProviderForModuleRefTest,
+        contextId,
+      );
+
+    return customProvider.getAnotherProviderByCurrentIdentifier();
+  }
 }
