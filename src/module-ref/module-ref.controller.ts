@@ -1,12 +1,16 @@
-import { Controller, Get, OnModuleInit } from '@nestjs/common';
-import { ContextIdFactory, ModuleRef } from '@nestjs/core';
+import { Controller, Get, Inject, OnModuleInit } from '@nestjs/common';
+import { ContextIdFactory, ModuleRef, REQUEST } from '@nestjs/core';
+import { Request } from 'express';
 import { ModuleRefService } from './module-ref.service';
 import { RequstScopeProviderForModuleRefTest } from './providers/request-scope.provider';
 
 @Controller('module-ref')
 export class ModuleRefController implements OnModuleInit {
   private service: ModuleRefService;
-  constructor(private moduleRef: ModuleRef) {}
+  constructor(
+    private moduleRef: ModuleRef,
+    @Inject(REQUEST) private request: Request,
+  ) {}
 
   onModuleInit() {
     console.log('获取ModuleRefService...');
@@ -53,5 +57,13 @@ export class ModuleRefController implements OnModuleInit {
     resolve can return same provider`;
 
     return str;
+  }
+
+  @Get('request-obj-not-exist')
+  async requestObjNotExist() {
+    const customProvider: RequstScopeProviderForModuleRefTest =
+      await this.moduleRef.resolve(RequstScopeProviderForModuleRefTest);
+
+    return customProvider.checkRequestObj();
   }
 }
