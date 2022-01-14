@@ -8,4 +8,9 @@ export class CircularDenController {
   print() {
     return this.service.print();
   }
+
+  @Get('module-ref')
+  moduleRef() {
+    return this.service.printA1B1();
+  }
 }
