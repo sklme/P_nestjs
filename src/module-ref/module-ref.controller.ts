@@ -61,8 +61,27 @@ export class ModuleRefController implements OnModuleInit {
 
   @Get('request-obj-not-exist')
   async requestObjNotExist() {
+    const contextId = ContextIdFactory.create();
     const customProvider: RequstScopeProviderForModuleRefTest =
-      await this.moduleRef.resolve(RequstScopeProviderForModuleRefTest);
+      await this.moduleRef.resolve(
+        RequstScopeProviderForModuleRefTest,
+        contextId,
+      );
+
+    return customProvider.checkRequestObj();
+  }
+
+  @Get('request-obj-exist')
+  async requestObjExist() {
+    //
+    const contextId = ContextIdFactory.create();
+    this.moduleRef.registerRequestByContextId(this.request, contextId);
+
+    const customProvider: RequstScopeProviderForModuleRefTest =
+      await this.moduleRef.resolve(
+        RequstScopeProviderForModuleRefTest,
+        contextId,
+      );
 
     return customProvider.checkRequestObj();
   }
