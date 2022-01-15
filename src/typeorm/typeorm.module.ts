@@ -4,6 +4,6 @@ import { TypeormController } from './typeorm.controller';
 
 @Module({
   providers: [TypeormService],
-  controllers: [TypeormController]
+  controllers: [TypeormController],
 })
 export class TypeormModule {}
