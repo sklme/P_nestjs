@@ -3,7 +3,12 @@ import { CacheController } from './cache.controller';
 import { CacheService } from './cache.service';
 
 @Module({
-  imports: [CacheModule.register()],
+  imports: [
+    CacheModule.register({
+      ttl: 1,
+      max: 20,
+    }),
+  ],
   controllers: [CacheController],
   providers: [CacheService],
 })

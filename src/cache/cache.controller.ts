@@ -1,5 +1,7 @@
 import {
   CacheInterceptor,
+  CacheKey,
+  CacheTTL,
   CACHE_MANAGER,
   Controller,
   Get,
@@ -43,6 +45,14 @@ export class CacheController {
   @Get('auto-caching')
   @UseInterceptors(CacheInterceptor)
   autoCaching() {
+    return this.service.getPersonInfo();
+  }
+
+  @Get('auto-caching-with-custom')
+  @CacheKey('custom_cache_key')
+  @CacheTTL(5)
+  @UseInterceptors(CacheInterceptor)
+  autoCachingWithCustom() {
     return this.service.getPersonInfo();
   }
 }
