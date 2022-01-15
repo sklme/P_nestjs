@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 export class CacheService {
   getPersonInfo() {
     return {
+      ts: new Date().toISOString(),
       name: '悲剧',
       age: Math.random() * 20,
     };

@@ -1,4 +1,11 @@
-import { CACHE_MANAGER, Controller, Get, Inject } from '@nestjs/common';
+import {
+  CacheInterceptor,
+  CACHE_MANAGER,
+  Controller,
+  Get,
+  Inject,
+  UseInterceptors,
+} from '@nestjs/common';
 import { Cache } from 'cache-manager';
 import { CacheService } from './cache.service';
 
@@ -31,5 +38,11 @@ export class CacheController {
     return Object.assign(cache, {
       msg: '不是来自Cache',
     });
+  }
+
+  @Get('auto-caching')
+  @UseInterceptors(CacheInterceptor)
+  autoCaching() {
+    return this.service.getPersonInfo();
   }
 }
