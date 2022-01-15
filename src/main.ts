@@ -6,6 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   // global exception filter
   // app.useGlobalFilters(new HttpExceptionFilter());
+  app.enableShutdownHooks();
   await app.listen(3001);
 }
 void bootstrap();

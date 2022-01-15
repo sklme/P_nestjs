@@ -26,6 +26,7 @@ import { CustomDecoratorsModule } from './custom-decorators/custom-decorators.mo
 import { InjectionScopesModule } from './injection-scopes/injection-scopes.module';
 import { CircularDenModule } from './circular-den/circular-den.module';
 import { ModuleRefModule } from './module-ref/module-ref.module';
+import { LifeCycleModule } from './life-cycle/life-cycle.module';
 import databaseConfigGroup from './config/databaseConfigGroup';
 import githubConfigNamespace from './config/githubConfigNamespace';
 
@@ -51,6 +52,7 @@ import githubConfigNamespace from './config/githubConfigNamespace';
     InjectionScopesModule,
     CircularDenModule,
     ModuleRefModule,
+    LifeCycleModule,
   ],
   controllers: [AppController],
   providers: [
