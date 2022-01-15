@@ -28,6 +28,7 @@ import { CircularDenModule } from './circular-den/circular-den.module';
 import { ModuleRefModule } from './module-ref/module-ref.module';
 import { LifeCycleModule } from './life-cycle/life-cycle.module';
 import { TypeormModule } from './typeorm/typeorm.module';
+import { CacheModule } from './cache/cache.module';
 import databaseConfigGroup from './config/databaseConfigGroup';
 import githubConfigNamespace from './config/githubConfigNamespace';
 
@@ -55,6 +56,7 @@ import githubConfigNamespace from './config/githubConfigNamespace';
     ModuleRefModule,
     LifeCycleModule,
     TypeormModule,
+    CacheModule,
   ],
   controllers: [AppController],
   providers: [
