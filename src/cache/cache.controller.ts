@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 import { CacheService } from './cache.service';
+import { HttpCacheInterceptor } from './common/http-cache.interceptor';
 
 interface BasicCache {
   name: string;
@@ -53,6 +54,13 @@ export class CacheController {
   @CacheTTL(5)
   @UseInterceptors(CacheInterceptor)
   autoCachingWithCustom() {
+    return this.service.getPersonInfo();
+  }
+
+  @Get('custom-cache-interceptor')
+  @CacheTTL(5)
+  @UseInterceptors(HttpCacheInterceptor)
+  customCacheInterceptor() {
     return this.service.getPersonInfo();
   }
 }
