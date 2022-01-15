@@ -27,6 +27,7 @@ import { InjectionScopesModule } from './injection-scopes/injection-scopes.modul
 import { CircularDenModule } from './circular-den/circular-den.module';
 import { ModuleRefModule } from './module-ref/module-ref.module';
 import { LifeCycleModule } from './life-cycle/life-cycle.module';
+import { TypeormModule } from './typeorm/typeorm.module';
 import databaseConfigGroup from './config/databaseConfigGroup';
 import githubConfigNamespace from './config/githubConfigNamespace';
 
@@ -53,6 +54,7 @@ import githubConfigNamespace from './config/githubConfigNamespace';
     CircularDenModule,
     ModuleRefModule,
     LifeCycleModule,
+    TypeormModule,
   ],
   controllers: [AppController],
   providers: [
