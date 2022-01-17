@@ -4,6 +4,7 @@ import {
   NestModule,
   RequestMethod,
 } from '@nestjs/common';
+import { ScheduleModule } from '@nestjs/schedule';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DogsModule } from './dogs/dogs.module';
@@ -65,6 +66,7 @@ import githubConfigNamespace from './config/githubConfigNamespace';
     QueuesModule,
     VersioningModule,
     TaskScheduleModule,
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [
