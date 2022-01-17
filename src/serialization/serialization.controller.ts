@@ -16,6 +16,10 @@ export class SerializationController {
       firstName: 'sun',
       lastName: 'wrynn',
       password: 'password',
+      role: {
+        name: 'admin',
+        age: 12,
+      },
     });
   }
 }

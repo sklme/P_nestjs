@@ -1,4 +1,9 @@
-import { Exclude, Expose } from 'class-transformer';
+import { Exclude, Expose, Transform } from 'class-transformer';
+
+class RoleEntity {
+  name: string;
+  age: number;
+}
 
 export class UserEntity {
   id: number;
@@ -7,6 +12,9 @@ export class UserEntity {
 
   @Exclude()
   password: string;
+
+  @Transform(({ value }: { value: RoleEntity }) => value.name)
+  role: RoleEntity;
 
   @Expose()
   get fullName() {
