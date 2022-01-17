@@ -1,4 +1,4 @@
-import { Controller, Get, Version } from '@nestjs/common';
+import { Controller, Get, Version, VERSION_NEUTRAL } from '@nestjs/common';
 
 @Controller('versioning')
 export class VersioningController {
@@ -16,5 +16,11 @@ export class VersioningController {
   @Version(['1', '2'])
   multiple() {
     return 'v1,v2 version content';
+  }
+
+  @Get('version_neutral')
+  @Version(['1', '2', VERSION_NEUTRAL])
+  neutral() {
+    return 'v1,v2 version content, no version prefix also work';
   }
 }
