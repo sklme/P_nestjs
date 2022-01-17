@@ -36,6 +36,7 @@ import { VersioningModule } from './versioning/versioning.module';
 import { TaskScheduleModule } from './task-schedule/task-schedule.module';
 import databaseConfigGroup from './config/databaseConfigGroup';
 import githubConfigNamespace from './config/githubConfigNamespace';
+import { BullModule } from '@nestjs/bull';
 
 @Module({
   imports: [
@@ -67,6 +68,12 @@ import githubConfigNamespace from './config/githubConfigNamespace';
     VersioningModule,
     TaskScheduleModule,
     ScheduleModule.forRoot(),
+    BullModule.forRoot({
+      redis: {
+        host: 'localhost',
+        port: 6379,
+      },
+    }),
   ],
   controllers: [AppController],
   providers: [
