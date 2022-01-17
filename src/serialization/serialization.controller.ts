@@ -13,8 +13,8 @@ export class SerializationController {
   basic() {
     return new UserEntity({
       id: 1,
-      firstName: 'Kamil',
-      lastName: 'Mysliwiec',
+      firstName: 'sun',
+      lastName: 'wrynn',
       password: 'password',
     });
   }

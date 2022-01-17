@@ -1,4 +1,4 @@
-import { Exclude } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 
 export class UserEntity {
   id: number;
@@ -7,6 +7,11 @@ export class UserEntity {
 
   @Exclude()
   password: string;
+
+  @Expose()
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
 
   constructor(partial: Partial<UserEntity>) {
     Object.assign(this, partial);
