@@ -29,6 +29,7 @@ import { ModuleRefModule } from './module-ref/module-ref.module';
 import { LifeCycleModule } from './life-cycle/life-cycle.module';
 import { TypeormModule } from './typeorm/typeorm.module';
 import { MyCacheModule } from './cache/cache.module';
+import { SerializationModule } from './serialization/serialization.module';
 import databaseConfigGroup from './config/databaseConfigGroup';
 import githubConfigNamespace from './config/githubConfigNamespace';
 
@@ -57,6 +58,7 @@ import githubConfigNamespace from './config/githubConfigNamespace';
     LifeCycleModule,
     TypeormModule,
     MyCacheModule,
+    SerializationModule,
   ],
   controllers: [AppController],
   providers: [
