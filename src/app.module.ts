@@ -31,6 +31,7 @@ import { TypeormModule } from './typeorm/typeorm.module';
 import { MyCacheModule } from './cache/cache.module';
 import { SerializationModule } from './serialization/serialization.module';
 import { QueuesModule } from './queues/queues.module';
+import { VersioningModule } from './versioning/versioning.module';
 import databaseConfigGroup from './config/databaseConfigGroup';
 import githubConfigNamespace from './config/githubConfigNamespace';
 
@@ -61,6 +62,7 @@ import githubConfigNamespace from './config/githubConfigNamespace';
     MyCacheModule,
     SerializationModule,
     QueuesModule,
+    VersioningModule,
   ],
   controllers: [AppController],
   providers: [
