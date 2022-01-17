@@ -32,6 +32,7 @@ import { MyCacheModule } from './cache/cache.module';
 import { SerializationModule } from './serialization/serialization.module';
 import { QueuesModule } from './queues/queues.module';
 import { VersioningModule } from './versioning/versioning.module';
+import { TaskScheduleModule } from './task-schedule/task-schedule.module';
 import databaseConfigGroup from './config/databaseConfigGroup';
 import githubConfigNamespace from './config/githubConfigNamespace';
 
@@ -63,6 +64,7 @@ import githubConfigNamespace from './config/githubConfigNamespace';
     SerializationModule,
     QueuesModule,
     VersioningModule,
+    TaskScheduleModule,
   ],
   controllers: [AppController],
   providers: [
