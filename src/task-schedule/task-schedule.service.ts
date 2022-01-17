@@ -23,13 +23,13 @@ export class TaskScheduleService {
 
   @Inject() private schedulerRegistry: SchedulerRegistry;
 
-  @Cron('* * * * * *')
-  handleCron() {
-    this.logger.debug('每秒执行');
-    const allJobs = this.schedulerRegistry.getCronJobs();
-    const jobNames = [...allJobs].map((map) => map[0]);
-    console.log(jobNames);
-  }
+  // @Cron('* * * * * *')
+  // handleCron() {
+  //   this.logger.debug('每秒执行');
+  //   const allJobs = this.schedulerRegistry.getCronJobs();
+  //   const jobNames = [...allJobs].map((map) => map[0]);
+  //   console.log(jobNames);
+  // }
 
   // @Cron('*/2 * * * * *')
   // step2() {
@@ -56,27 +56,27 @@ export class TaskScheduleService {
   //   this.logger.warn('我真是太猛了');
   // }
 
-  @Cron(CronExpression.EVERY_5_SECONDS, {
-    name: 'every_5_senconds',
-  })
-  every5Sec() {
-    this.logger.debug('Called every 5 seconds');
-  }
+  // @Cron(CronExpression.EVERY_5_SECONDS, {
+  //   name: 'every_5_senconds',
+  // })
+  // every5Sec() {
+  //   this.logger.debug('Called every 5 seconds');
+  // }
 
-  @Timeout('stop_every_5_senconds', 15000)
-  stop5Secs() {
-    //
-    const job = this.schedulerRegistry.getCronJob('every_5_senconds');
-    console.log('停止5秒一次的任务');
-    job.stop();
+  // @Timeout('stop_every_5_senconds', 15000)
+  // stop5Secs() {
+  //   //
+  //   const job = this.schedulerRegistry.getCronJob('every_5_senconds');
+  //   console.log('停止5秒一次的任务');
+  //   job.stop();
 
-    const every10Secs = new CronJob(CronExpression.EVERY_10_SECONDS, () => {
-      this.logger.debug('10秒运行一次');
-    });
-    this.schedulerRegistry.addCronJob('stop_every_10_senconds', every10Secs);
-    console.log('开始10秒一次的任务');
-    every10Secs.start();
-    console.log('删除掉5秒的任务');
-    this.schedulerRegistry.deleteCronJob('every_5_senconds');
-  }
+  //   const every10Secs = new CronJob(CronExpression.EVERY_10_SECONDS, () => {
+  //     this.logger.debug('10秒运行一次');
+  //   });
+  //   this.schedulerRegistry.addCronJob('stop_every_10_senconds', every10Secs);
+  //   console.log('开始10秒一次的任务');
+  //   every10Secs.start();
+  //   console.log('删除掉5秒的任务');
+  //   this.schedulerRegistry.deleteCronJob('every_5_senconds');
+  // }
 }
