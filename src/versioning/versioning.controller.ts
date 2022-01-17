@@ -11,4 +11,10 @@ export class VersioningController {
   basic() {
     return 'v1 verison content';
   }
+
+  @Get('multiple-version')
+  @Version(['1', '2'])
+  multiple() {
+    return 'v1,v2 version content';
+  }
 }
