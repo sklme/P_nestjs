@@ -25,3 +25,17 @@ export class UserEntity {
     Object.assign(this, partial);
   }
 }
+
+export class StudentEntity {
+  id: number;
+  firstName: string;
+  lastName: string;
+
+  _password: string;
+  _secret: string;
+  _sensitiveInfo: string;
+
+  constructor(student: StudentEntity) {
+    Object.assign(this, student);
+  }
+}

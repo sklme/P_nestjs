@@ -2,9 +2,10 @@ import {
   ClassSerializerInterceptor,
   Controller,
   Get,
+  SerializeOptions,
   UseInterceptors,
 } from '@nestjs/common';
-import { UserEntity } from './common/dto';
+import { StudentEntity, UserEntity } from './common/dto';
 
 @Controller('serialization')
 export class SerializationController {
@@ -20,6 +21,22 @@ export class SerializationController {
         name: 'admin',
         age: 12,
       },
+    });
+  }
+
+  @Get('exclude-prefix')
+  @UseInterceptors(ClassSerializerInterceptor)
+  @SerializeOptions({
+    excludePrefixes: ['_'],
+  })
+  prefix() {
+    return new StudentEntity({
+      _password: '123',
+      _secret: '321',
+      _sensitiveInfo: 'very sensitive',
+      lastName: 'kl',
+      firstName: 'sun',
+      id: 123,
     });
   }
 }
