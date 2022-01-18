@@ -1,11 +1,20 @@
-import { Process, Processor } from '@nestjs/bull';
-import { Logger } from '@nestjs/common';
+import { JOB_REF, Process, Processor } from '@nestjs/bull';
+import { Inject, Logger, Scope } from '@nestjs/common';
 import { Job } from 'bull';
 import { TestTaskShape } from './common/interface';
 
-@Processor('test') // 这个test 是指定队列的名字
+@Processor({
+  scope: Scope.REQUEST,
+  name: 'test',
+}) // 这个test 是指定队列的名字
 export class TestProcessor {
   private readonly logger = new Logger(TestProcessor.name);
+
+  constructor(@Inject(JOB_REF) jobRef: Job<TestTaskShape>) {
+    // Since request-scoped consumer classes are instantiated dynamically and scoped to a single job, you can inject a JOB_REF through the constructor using a standard approach.
+    // console.log(jobRef);
+    console.log(jobRef.data);
+  }
 
   @Process()
   async handleCommon(job: Job<TestTaskShape>) {

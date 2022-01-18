@@ -7,6 +7,8 @@ import { TestTaskShape } from './common/interface';
 export class QueuesController {
   private readonly logger = new Logger(QueuesController.name);
 
+  reqTime = 0;
+
   // 注入队列
   constructor(
     @InjectQueue('test') private readonly testQueue: Queue<TestTaskShape>,
@@ -16,6 +18,7 @@ export class QueuesController {
   // default queue
   @Get()
   async defaultProducer() {
+    console.log(`请求次数: ${++this.reqTime}`);
     const job = await this.queue.add({
       name: '什么什么',
       age: 100000,
@@ -30,6 +33,7 @@ export class QueuesController {
   // producer
   @Get('add-job-to-test-queue')
   async addJobToTestQueue() {
+    console.log(`请求次数: ${++this.reqTime}`);
     const job = await this.testQueue.add({
       name: '我最厉害',
       age: 12,
@@ -44,6 +48,7 @@ export class QueuesController {
   // named Job
   @Get('named-job-to-test-queue')
   async namedJobToTestQueue() {
+    console.log(`请求次数: ${++this.reqTime}`);
     const job = await this.testQueue.add('goodName', {
       name: '命名的任务',
       age: 1,
