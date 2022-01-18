@@ -1,6 +1,7 @@
 import { VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from 'src/app.module';
+import cookieParser from 'cookie-parser';
 // import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 
 async function bootstrap() {
@@ -11,6 +12,7 @@ async function bootstrap() {
   app.enableVersioning({
     type: VersioningType.URI,
   });
+  app.use(cookieParser());
   await app.listen(3001);
 }
 void bootstrap();

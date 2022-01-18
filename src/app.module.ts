@@ -37,6 +37,7 @@ import { TaskScheduleModule } from './task-schedule/task-schedule.module';
 import databaseConfigGroup from './config/databaseConfigGroup';
 import githubConfigNamespace from './config/githubConfigNamespace';
 import { BullModule } from '@nestjs/bull';
+import { CookieModule } from './cookie/cookie.module';
 
 @Module({
   imports: [
@@ -93,6 +94,7 @@ import { BullModule } from '@nestjs/bull';
       },
       inject: [ConfigService],
     }),
+    CookieModule,
   ],
   controllers: [AppController],
   providers: [
