@@ -1,5 +1,6 @@
 import { BullModule } from '@nestjs/bull';
 import { Module } from '@nestjs/common';
+import { CommonProcessor } from './queue.processor';
 import { QueuesController } from './queues.controller';
 import { TestProcessor } from './test-queue.processor';
 
@@ -10,12 +11,14 @@ import { TestProcessor } from './test-queue.processor';
 
 @Module({
   imports: [
-    // 注册一个任务队列
+    // 注册一个默认的任务队列
+    BullModule.registerQueue({}),
+    // 注册一个命名的任务队列
     BullModule.registerQueue({
       name: 'test',
     }),
   ],
   controllers: [QueuesController],
-  providers: [TestProcessor],
+  providers: [TestProcessor, CommonProcessor],
 })
 export class QueuesModule {}

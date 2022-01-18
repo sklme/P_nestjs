@@ -3,13 +3,13 @@ import { Logger } from '@nestjs/common';
 import { Job } from 'bull';
 import { TestTaskShape } from './common/interface';
 
-@Processor('test') // 这个test 是指定队列的名字
-export class TestProcessor {
-  private readonly logger = new Logger(TestProcessor.name);
+@Processor() // 这个test 是指定队列的名字
+export class CommonProcessor {
+  private readonly logger = new Logger(CommonProcessor.name);
 
   @Process()
   async handleCommon(job: Job<TestTaskShape>) {
-    this.logger.debug('测试队列任务开始处理...');
+    this.logger.debug('common测试队列任务开始处理...');
 
     const now = Date.now();
 
@@ -25,7 +25,7 @@ export class TestProcessor {
       }, Math.random() * 5000);
     });
 
-    this.logger.debug('任务处理完成', Date.now() - now);
+    this.logger.debug('common任务处理完成', Date.now() - now);
 
     return result;
   }
