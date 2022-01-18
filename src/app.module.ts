@@ -38,6 +38,8 @@ import databaseConfigGroup from './config/databaseConfigGroup';
 import githubConfigNamespace from './config/githubConfigNamespace';
 import { BullModule } from '@nestjs/bull';
 import { CookieModule } from './cookie/cookie.module';
+import { EventsModule } from './events/events.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
@@ -95,6 +97,10 @@ import { CookieModule } from './cookie/cookie.module';
       inject: [ConfigService],
     }),
     CookieModule,
+    EventEmitterModule.forRoot({
+      wildcard: true,
+    }),
+    EventsModule,
   ],
   controllers: [AppController],
   providers: [
