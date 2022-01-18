@@ -65,6 +65,8 @@ export class QueuesController {
   @Get('separate-process')
   async separateProcess() {
     console.log(`请求次数: ${++this.reqTime}`);
+    this.logger.debug(`主进程id: ${process.pid}`);
+
     const job = await this.separateQueue.add({
       name: '在不同进程处理的任务',
       age: 1,
