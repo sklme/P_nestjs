@@ -12,6 +12,8 @@ export class QueuesController {
   // 注入队列
   constructor(
     @InjectQueue('test') private readonly testQueue: Queue<TestTaskShape>,
+    @InjectQueue('separate')
+    private readonly separateQueue: Queue<TestTaskShape>,
     @InjectQueue() private readonly queue: Queue<TestTaskShape>,
   ) {}
 
@@ -55,6 +57,22 @@ export class QueuesController {
     });
 
     const result = (await job.finished()) as TestTaskShape;
+
+    return result;
+  }
+
+  // separate
+  @Get('separate-process')
+  async separateProcess() {
+    console.log(`请求次数: ${++this.reqTime}`);
+    const job = await this.separateQueue.add({
+      name: '在不同进程处理的任务',
+      age: 1,
+    });
+
+    const result = (await job.finished()) as TestTaskShape;
+
+    this.logger.debug('多进程任务处理完成...');
 
     return result;
   }

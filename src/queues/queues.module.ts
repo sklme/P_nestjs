@@ -1,5 +1,6 @@
 import { BullModule } from '@nestjs/bull';
 import { Module } from '@nestjs/common';
+import { join } from 'path';
 import { CommonProcessor } from './queue.processor';
 import { QueuesController } from './queues.controller';
 import { TestProcessor } from './test-queue.processor';
@@ -16,6 +17,11 @@ import { TestProcessor } from './test-queue.processor';
     // 注册一个命名的任务队列
     BullModule.registerQueue({
       name: 'test',
+    }),
+    // 注册一个在别的进程处理的队列
+    BullModule.registerQueue({
+      name: 'separate',
+      processors: [join(__dirname, 'separate-process.processor.js')],
     }),
   ],
   controllers: [QueuesController],
