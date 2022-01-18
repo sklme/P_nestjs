@@ -1,4 +1,4 @@
-import { Process, Processor } from '@nestjs/bull';
+import { OnQueueActive, Process, Processor } from '@nestjs/bull';
 import { Logger } from '@nestjs/common';
 import { Job } from 'bull';
 import { TestTaskShape } from './common/interface';
@@ -28,5 +28,15 @@ export class CommonProcessor {
     this.logger.debug('common任务处理完成', Date.now() - now);
 
     return result;
+  }
+
+  // events
+  @OnQueueActive()
+  onActive(job: Job<TestTaskShape>) {
+    console.log(
+      `Processing job ${job.id} of type ${job.name} with data ${JSON.stringify(
+        job.data,
+      )}...`,
+    );
   }
 }
