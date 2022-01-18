@@ -17,7 +17,7 @@ import { ExceptionModule } from './exceptions/exceptions.module';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 import { PipeModule } from './pipe/pipe.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ModuleConfigTestModule } from './module-config-test/module-config-test.module';
 import { MyConfigModuleModule } from './my-config-module/my-config-module.module';
 import { CustomProviderModule } from './custom-provider/custom-provider.module';
@@ -68,11 +68,30 @@ import { BullModule } from '@nestjs/bull';
     VersioningModule,
     TaskScheduleModule,
     ScheduleModule.forRoot(),
-    BullModule.forRoot({
-      redis: {
-        host: 'localhost',
-        port: 6379,
+    // BullModule.forRoot({
+    //   redis: {
+    //     host: 'localhost',
+    //     port: 6379,
+    //   },
+    // }),
+    BullModule.forRootAsync({
+      imports: [ConfigModule],
+      async useFactory(configService: ConfigService) {
+        return new Promise((resolve) => {
+          const redisHost: string = configService.get('REDIS_HOST');
+          const redisPort: string = configService.get('REDIS_PORT');
+
+          setTimeout(() => {
+            resolve({
+              redis: {
+                host: redisHost,
+                port: parseInt(redisPort, 10),
+              },
+            });
+          }, 0);
+        });
       },
+      inject: [ConfigService],
     }),
   ],
   controllers: [AppController],
