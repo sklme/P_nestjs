@@ -40,4 +40,17 @@ export class QueuesController {
 
     return result;
   }
+
+  // named Job
+  @Get('named-job-to-test-queue')
+  async namedJobToTestQueue() {
+    const job = await this.testQueue.add('goodName', {
+      name: '命名的任务',
+      age: 1,
+    });
+
+    const result = (await job.finished()) as TestTaskShape;
+
+    return result;
+  }
 }
