@@ -40,6 +40,7 @@ import { BullModule } from '@nestjs/bull';
 import { CookieModule } from './cookie/cookie.module';
 import { EventsModule } from './events/events.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { HttpMoModule } from './http-mo/http-mo.module';
 
 @Module({
   imports: [
@@ -101,6 +102,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
       wildcard: true,
     }),
     EventsModule,
+    HttpMoModule,
   ],
   controllers: [AppController],
   providers: [
